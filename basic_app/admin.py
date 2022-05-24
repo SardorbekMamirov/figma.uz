@@ -9,6 +9,8 @@ admin.site.unregister(models.TokenModel),
 admin.site.register(models.Categories),
 admin.site.register(models.Products),
 admin.site.register(models.Konsultatsiya),
+admin.site.register(models.Zakaz),
+
 
 
 class CustomUserAdminModel(UserAdmin):

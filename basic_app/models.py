@@ -22,24 +22,6 @@ class Categories(models.Model):
     def __str__(self):
         return self.categoryname
 
-class Products(models.Model):
-    category=models.ForeignKey(Categories, on_delete=models.CASCADE)
-    image=models.ImageField(upload_to='images/')
-    old_price=models.CharField(max_length=200)
-    dis_price=models.CharField(max_length=200)
-    quantity=models.PositiveIntegerField()
-    ramka_uz=models.CharField(max_length=200)
-    ramka_ru=models.CharField(max_length=200)
-    razmer_m=models.CharField(max_length=200)
-    razmer_sm=models.CharField(max_length=200)
-    recommendation_uz=models.CharField(max_length=200)
-    recommendation_ru=models.CharField(max_length=200)
-    complekt_uz=models.CharField(max_length=200)
-    complekt_ru=models.CharField(max_length=200)
-    
-
-    def __str__(self):
-        return self.old_price
 
 class MyManager(BaseUserManager):
     def create_user(self, username, **extra):
@@ -96,9 +78,29 @@ class Site(models.Model):
     time_uz=models.CharField(max_length=100, verbose_name='Рабочее времяxx')
     telegram=models.CharField(max_length=100, verbose_name='Телеграм')
     instagram=models.CharField(max_length=100, verbose_name='Инстаграм')
-    
     def __str__(self) -> str:
         return self.tel
+    
+    
+class Products(models.Model):
+    category=models.ForeignKey(Categories, on_delete=models.CASCADE)
+    image=models.ImageField(upload_to='images/')
+    old_price=models.CharField(max_length=200)
+    dis_price=models.CharField(max_length=200)
+    quantity=models.CharField(max_length=100)
+    ramka_uz=models.CharField(max_length=200)
+    ramka_ru=models.CharField(max_length=200)
+    razmer_m=models.CharField(max_length=200)
+    razmer_sm=models.CharField(max_length=200)
+    recommendation_uz=models.CharField(max_length=200)
+    recommendation_ru=models.CharField(max_length=200)
+    complekt_uz=models.CharField(max_length=200)
+    complekt_ru=models.CharField(max_length=200)
+    
+
+    def __str__(self):
+        return self.quantity
+    
 
 
 class Zakaz(models.Model):
@@ -110,8 +112,9 @@ class Zakaz(models.Model):
     address=models.CharField(max_length=100)
     date=models.DateTimeField(auto_now_add=True)
     active=models.BooleanField()
-    count=models.CharField(max_length=100)
+    count=models.BigIntegerField()
     product_name=models.CharField(max_length=100)
+    
     
     def __str__(self):
         return self.name
